@@ -3,12 +3,19 @@ import {TodoItem} from './TodoItem'
 import React, { useState, useEffect } from 'react';
 function App() {
     const [todos, setTodos] = useState([]);
-    function handleSubmit(e) {
+    const handleSubmit = (e) => {
         const {todoItem} = e.target.elements
         let todoTask = todoItem.value
         setTodos([...todos, todoTask])
         e.preventDefault()
         e.target.reset()
+    }
+
+    const deleteHandler = (idx) => {
+        let tempCopy = [...todos]
+        tempCopy.splice(idx,1)
+        setTodos(tempCopy)
+        console.log("Function called"+ idx)
     }
 
     // Debugging
@@ -23,7 +30,7 @@ function App() {
        <input type="submit" value="Add Todo" />
     </form>
     {todos.map((todo, index) => (
-          <TodoItem todoItem = {todo} key = {index}/>
+          <TodoItem todoItem = {todo} key = {index} deleteIndex = {index} deleteHandler = {deleteHandler}/>
       ))}
 
     </div>
