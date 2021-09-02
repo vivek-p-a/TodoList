@@ -9,6 +9,11 @@ function App() {
   const handleSubmit = (e) => {
     const { todoItem } = e.target.elements;
     let todoTask = todoItem.value;
+    if (todoTask === "") {
+        alert("Can't add Empty Todo")
+        e.preventDefault();
+        return
+    }
 // tempObject[0] - Task, tempObject[1] = Active Status
     let tempObject = [todoTask, false];
     setTodos([...todos, tempObject]);
@@ -65,13 +70,13 @@ function App() {
   const activeHandler = () => {
     let newButtonState = [...buttonStates]
     newButtonState[1] = true
-    setButtonStates([false,newButtonState, false])
+    setButtonStates([false, false,newButtonState])
 }
 
 const completedHandler = () => {
     let newButtonState = [...buttonStates]
     newButtonState[2] = true
-    setButtonStates([false,false,newButtonState])
+    setButtonStates([false,newButtonState,false])
 }
  const editItem = (e) =>{
     const { todoItem } = e.target.elements;
@@ -93,14 +98,15 @@ const completedHandler = () => {
   }, [todos]);
 
   return (
-    <div className="App">
+    <div className="App p-4">
       <form onSubmit={editingState?editItem:handleSubmit}>
         <input type="text" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="todoItem" defaultValue={editingState?todos[idOfTodoToBeEdited][0]:""}   />
-        <input type="submit" value={editingState?"Update Todo":"Add Todo"}/>
+        <input type="submit" className="my-4 bg-red-800 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" value={editingState?"Update Todo":"Add Todo"}/>
       </form>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded mx-1" onClick = {toggleHandler}> All Tasks </button>
-      <button className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded mx-1" onClick = {activeHandler}> Active </button>
-      <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded mx-1" onClick = {completedHandler}> Completed </button>
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded m-3" onClick = {toggleHandler}> All Tasks </button>
+      <button className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded m-3" onClick = {activeHandler}> Active </button>
+      <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded m-3" onClick = {completedHandler}> Completed </button>
+      <h1 className="text-xl font-bold">{CompletedTodos.length} Tasks Remaining</h1>
       {buttonStates[0] && showAllJSX}
       {buttonStates[1] && activeTodosJSX}
       {buttonStates[2] && CompletedTodosJSX}

@@ -1,6 +1,6 @@
 const TodoItem = (props) => {
     return (
-      <div className="border-2 border-indigo-600 flex justify-between">
+      <div className="flex justify-between my-3">
         <span>
           <input
             type="checkbox"
@@ -10,7 +10,7 @@ const TodoItem = (props) => {
           {props.todoItem}
         </span>
         <span>
-        <button className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded mx-1" onClick={() => props.editHandler(props.deleteIndex)}>
+        <button className="bg-red-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mx-1" onClick={() => props.editHandler(props.deleteIndex)}>
             Edit
         </button>
         <button
