@@ -21,26 +21,28 @@ function App() {
     e.target.reset();
   };
 
-  const deleteHandler = (idx) => {
+  const deleteHandler = (task) => {
     let tempCopy = [...todos];
-    tempCopy.splice(idx, 1);
+    let index = tempCopy.map(function(el){return el[0];}).indexOf(task);
+    tempCopy.splice(index, 1);
     setTodos(tempCopy);
-    console.log("Function called" + idx);
+    console.log("Function called" + index);
   };
 
-  const checkBoxHandler = (idx) => {
+  const checkBoxHandler = (task) => {
     let tempCopy = [...todos];
-    console.log(tempCopy[idx]);
-    tempCopy[idx][1] = !tempCopy[idx][1];
+    let index = tempCopy.map(function(el){return el[0];}).indexOf(task);
+    console.log(tempCopy[index]);
+    tempCopy[index][1] = !tempCopy[index][1];
     setTodos(tempCopy);
-    console.log("Function called" + idx);
   };
 
-  const editHandler = (idx) => {
+  const editHandler = (task) => {
     setEditingState(true)
-    setIDOfTodoToBeEdited(idx)
+    let index = todos.map(function(el){return el[0];}).indexOf(task);
+    setIDOfTodoToBeEdited(index)
 }
-  function todoMapper(items) {
+  const todoMapper = (items) => {
     let mappedItems = items.map((todo, index) => (
         <TodoItem
           todoItem={todo[0]}
@@ -99,14 +101,19 @@ const completedHandler = () => {
 
   return (
     <div className="App p-4">
-      <form onSubmit={editingState?editItem:handleSubmit}>
+      <h1 className="font-bold text-gray-700 text-4xl text-center mx-4"> Todomatic!</h1>
+      <form onSubmit={editingState?editItem:handleSubmit} >
         <input type="text" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="todoItem" defaultValue={editingState?todos[idOfTodoToBeEdited][0]:""}   />
-        <input type="submit" className="my-4 bg-red-800 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" value={editingState?"Update Todo":"Add Todo"}/>
+        <span className="flex justify-center mr-4">
+            <input type="submit" className="my-4 bg-red-800 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded" value={editingState?"Update Todo":"Add Todo"}/>
+        </span>
       </form>
+      <div className="flex justify-around">
       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded m-3" onClick = {toggleHandler}> All Tasks </button>
-      <button className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded m-3" onClick = {activeHandler}> Active </button>
+      <button className="bg-purple-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded m-3" onClick = {activeHandler}> Active </button>
       <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded m-3" onClick = {completedHandler}> Completed </button>
-      <h1 className="text-xl font-bold">{CompletedTodos.length} Tasks Remaining</h1>
+      </div>
+      <h1 className="text-xl font-bold">{CompletedTodos.length} Task(s) Remaining</h1>
       {buttonStates[0] && showAllJSX}
       {buttonStates[1] && activeTodosJSX}
       {buttonStates[2] && CompletedTodosJSX}

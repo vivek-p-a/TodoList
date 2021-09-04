@@ -1,20 +1,20 @@
 const TodoItem = (props) => {
     return (
-      <div className="flex justify-between my-3">
+      <div className={props.isActive?"flex justify-between my-3 p-3 rounded-md bg-green-600":"flex justify-between my-3 p-3 rounded-md bg-purple-600"}>
         <span>
           <input
             type="checkbox"
-            onClick={() => props.checkBoxHandler(props.deleteIndex)}
-            defaultChecked={props.isActive}
+            checked={props.isActive}
+            onClick={() => props.checkBoxHandler(props.todoItem)}
           ></input>
           {props.todoItem}
         </span>
         <span>
-        <button className="bg-red-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mx-1" onClick={() => props.editHandler(props.deleteIndex)}>
+        <button className="bg-red-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mx-1" onClick={() => props.editHandler(props.todoItem)}>
             Edit
         </button>
         <button
-          onClick={() => props.deleteHandler(props.deleteIndex)}
+          onClick={() => props.deleteHandler(props.todoItem)}
           className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
         >
           <svg
