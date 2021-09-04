@@ -26,13 +26,11 @@ function App() {
     let index = tempCopy.map(function(el){return el[0];}).indexOf(task);
     tempCopy.splice(index, 1);
     setTodos(tempCopy);
-    console.log("Function called" + index);
   };
 
   const checkBoxHandler = (task) => {
     let tempCopy = [...todos];
     let index = tempCopy.map(function(el){return el[0];}).indexOf(task);
-    console.log(tempCopy[index]);
     tempCopy[index][1] = !tempCopy[index][1];
     setTodos(tempCopy);
   };
@@ -94,10 +92,6 @@ const completedHandler = () => {
 
  }
 
-  // Debugging
-  useEffect(() => {
-    console.log(todos);
-  }, [todos]);
 
   return (
     <div className="App p-4">
