@@ -4,13 +4,13 @@ const TodoItem = (props) => {
         <span>
           <div class="flex items-center">
             <input
-                id = "option1"
+                id = {props.todoItem}
                 type="checkbox"
                 className = "form-checkbox h-8 w-6"
                 checked={props.isActive}
                 onClick={() => props.checkBoxHandler(props.todoItem)}
             />
-           <label for="option1" class="ml-3 text-md font-medium text-white">{props.todoItem}</label>
+           <label for={props.todoItem} class="ml-3 text-md font-medium text-white">{props.todoItem}</label>
           </div>
         </span>
         <span>

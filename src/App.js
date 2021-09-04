@@ -102,10 +102,10 @@ const completedHandler = () => {
   return (
     <div className="App p-4">
       <h1 className="font-bold text-gray-700 text-4xl text-center mx-4"> Todomatic!</h1>
-      <form onSubmit={editingState?editItem:handleSubmit} >
-        <input type="text" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="todoItem" defaultValue={editingState?todos[idOfTodoToBeEdited][0]:""}   />
+      <form onSubmit={editingState?editItem:handleSubmit} className="mt-5" >
+        <input type="text" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="todoItem" placeholder="Enter Todo" defaultValue={editingState?todos[idOfTodoToBeEdited][0]:""}   />
         <span className="flex justify-center mr-4">
-            <input type="submit" className="my-4 bg-red-800 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded" value={editingState?"Update Todo":"Add Todo"}/>
+            <input type="submit" className={editingState?"my-4 bg-purple-800 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded":"my-4 bg-red-800 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded"} value={editingState?"Update Todo":"Add Todo"}/>
         </span>
       </form>
       <div className="flex justify-around">
